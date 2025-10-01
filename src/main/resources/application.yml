@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: Spring-Thymeleaf
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false # Disable caching for development - set to false for hot refresh
+    servlet:
+      content-type: text/html
+
+logging:
+  pattern:
+    console: '%clr(%d{dd-MM-yyyy HH:mm:ss}){blue} %clr(%5p) %clr([%t]){faint} %clr(%-40.40logger){cyan} %clr(:){yellow} %m%n'
+
+  file:
+    name: './logs/logging_gvr.log'
+    max-size: 1MB 
+    total-size-cap: 10MB
+    max-history: 2
+
+  level: # Log Level: ERROR, WARN, INFO, DEBUG, or TRACE
+    #root: "WARN"
+    root: "INFO"
+    #'[org.hibernate]': "DEBUG"
+    #'[org.hibernate.SQL]': "DEBUG"
+    '[br.com.zuco]': "DEBUG"
