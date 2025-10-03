@@ -41,5 +41,12 @@ public class DepartamentoService {
 		Departamento departamento = repository.findById(id).orElseThrow();
 		return departamento;
 	}
+
+	public boolean departamentoTemCargos(Long id) {
+		if (buscarPorId(id).getCargos().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 	
 }

@@ -41,7 +41,8 @@
 									<i class="bi bi-brush-fill"></i>
 								</a>
 								
-								<button type="button" class="btn btn-danger btn-sm">
+								<button th:id="${'btn_departamentos/excluir/' + d.id}" type="button" class="btn btn-danger btn-sm"
+					             		data-bs-toggle="modal" data-bs-target="#myModal">
 									<i class="bi bi-x"></i>
 								</button>
 							</td>
@@ -50,6 +51,9 @@
 				</table>
 			</div>
 		</div>
+		
+		<div th:replace="~{layout/fragments/modal :: modal}"></div>
+		
 	</section>
 </body>
 </html>		
