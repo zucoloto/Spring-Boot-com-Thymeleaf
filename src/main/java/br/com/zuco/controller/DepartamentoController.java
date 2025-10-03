@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,6 +32,18 @@ public class DepartamentoController {
 	@PostMapping("/salvar")
 	public String salvar(Departamento departamento) {
 		service.salvar(departamento);
+		return "redirect:/departamentos/cadastrar";
+	}
+	
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable("id") Long id1, ModelMap model) {
+		model.addAttribute("departamento", service.buscarPorId(id1));
+		return "/departamento/cadastro";
+	}
+	
+	@PostMapping("/atualizar")
+	public  String atualizar(Departamento departamento) {
+		service.atualizar(departamento);
 		return "redirect:/departamentos/cadastrar";
 	}
 	

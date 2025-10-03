@@ -37,7 +37,7 @@
 							<td th:text="${d.id}">ID</td>
 							<td th:text="${d.nome}">NOME</td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" href="#" role="button"> 
+								<a class="btn btn-info btn-sm" th:href="@{/departamentos/editar/{id} (id=${d.id})}" role="button"> 
 									<i class="bi bi-brush-fill"></i>
 								</a>
 								
