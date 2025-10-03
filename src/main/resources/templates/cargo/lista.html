@@ -44,7 +44,9 @@
 	                            <a class="btn btn-info btn-sm" th:href="@{/cargos/editar/{id} (id=${c.id}) }" role="button">
 	                                <i class="bi bi-brush-fill"></i>
 	                            </a>
-	                            <button type="button" class="btn btn-danger btn-sm" >
+	                            
+	                            <button th:id="${#strings.concat('btn_cargos/excluir/', c.id)  }" type="button" 
+	                            	class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
 	                                <i class="bi bi-x"></i>
 	                            </button>
 	                        </td>
@@ -53,6 +55,8 @@
 	                </table>
 	            </div>
 	        </div>
+	        
+	        <div th:replace="~{layout/fragments/modal :: modal}"></div>
 	        
 	    </section>
 </body>
