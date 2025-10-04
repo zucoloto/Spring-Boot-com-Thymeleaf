@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Table(name = "cargo")
 public class Cargo extends AbstractEntity<Long> {
 
-	@Column(name = "nome", nullable = false, unique = true, length = 60)
+	@Column(name = "nome", nullable = false, length = 60)
 	private String nome;
 	
 	@ManyToOne
