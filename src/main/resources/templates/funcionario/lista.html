@@ -23,6 +23,8 @@
 		</nav>
 
 		<div class="container">
+		
+			<div th:replace="~{layout/fragments/alert}"></div>
 
 			<p>
 				<i class="oi oi-magnifying-glass"></i><span></span>
@@ -143,11 +145,11 @@
 							<td th:text="${#temporals.format(f.dataEntrada, 'dd/MM/yyyy')}">DATA_ENTRADA</td>
 							<td th:text="${#temporals.format(f.dataSaida, 'dd/MM/yyyy')}">DATA_SAIDA</td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" href="/funcionarios/editar/1" role="button"> 
+								<a class="btn btn-info btn-sm" th:href="@{/funcionarios/editar/{id} (id=${f.id}) }" role="button"> 
 									<i class="bi bi-brush-fill"></i>
 								</a>
-								<button id="btn_funcionarios/excluir/1" type="button" class="btn btn-danger btn-sm" 
-									data-toggle="modal" data-target="#myModal">
+								<button th:id="${#strings.concat('btn_funcionarios/excluir/', f.id) }" type="button" 
+									class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
 									<i class="bi bi-x"></i>
 								</button>
 							</td>
@@ -156,6 +158,9 @@
 				</table>
 			</div>
 		</div>
+		
+		<div th:replace="~{layout/fragments/modal :: modal}"></div>
+		
 	</section>
 </body>
 </html>		

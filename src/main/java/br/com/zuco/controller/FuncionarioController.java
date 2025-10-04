@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,6 +44,26 @@ public class FuncionarioController {
 		funcionarioService.salvar(funcionario);
 		attr.addFlashAttribute("success", "Funcionário inserido com sucesso.");
 		return "redirect:/funcionarios/cadastrar";
+	}
+	
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id1, ModelMap model) {
+		model.addAttribute("funcionario", funcionarioService.buscarPorId(id1));
+		return "funcionario/cadastro";
+	}
+	
+	@PostMapping("/atualizar")
+	public String atualizar(Funcionario funcionario, RedirectAttributes attr) {
+		funcionarioService.atualizar(funcionario);
+		attr.addFlashAttribute("success", "Funcionário editado com sucesso.");
+		return "redirect:/funcionarios/cadastrar";
+	}	
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id1, RedirectAttributes attr) {
+		funcionarioService.excluir(id1);
+		attr.addFlashAttribute("success", "Funcionário removido com sucesso.");
+		return "redirect:/funcionarios/listar";
 	}
 	
 	@ModelAttribute("cargos")
