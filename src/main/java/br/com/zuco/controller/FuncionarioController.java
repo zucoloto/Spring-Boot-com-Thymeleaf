@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import br.com.zuco.entity.Funcionario;
 import br.com.zuco.entity.UF;
 import br.com.zuco.service.CargoService;
 import br.com.zuco.service.FuncionarioService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("funcionarios")
@@ -40,7 +42,11 @@ public class FuncionarioController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(Funcionario funcionario, RedirectAttributes attr) {
+	public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "funcionario/cadastro";
+		}
+		
 		funcionarioService.salvar(funcionario);
 		attr.addFlashAttribute("success", "Funcionário inserido com sucesso.");
 		return "redirect:/funcionarios/cadastrar";
@@ -53,7 +59,11 @@ public class FuncionarioController {
 	}
 	
 	@PostMapping("/atualizar")
-	public String atualizar(Funcionario funcionario, RedirectAttributes attr) {
+	public String atualizar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "funcionario/cadastro";
+		}
+		
 		funcionarioService.atualizar(funcionario);
 		attr.addFlashAttribute("success", "Funcionário editado com sucesso.");
 		return "redirect:/funcionarios/cadastrar";

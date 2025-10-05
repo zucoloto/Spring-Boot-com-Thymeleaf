@@ -26,6 +26,9 @@
 	        	<div th:replace="~{layout/fragments/alert}"></div>
 	        
 	            <form th:action="${departamento.id == null} ? @{/departamentos/salvar} : @{/departamentos/atualizar}" th:object="${departamento}" method="POST">
+	                
+	                <div th:replace="~{layout/fragments/validacao  :: validacao}"></div>
+	                
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Departamento</label>

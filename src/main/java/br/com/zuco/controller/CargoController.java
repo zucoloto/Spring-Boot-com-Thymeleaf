@@ -17,6 +17,7 @@ import br.com.zuco.entity.Cargo;
 import br.com.zuco.entity.Departamento;
 import br.com.zuco.service.CargoService;
 import br.com.zuco.service.DepartamentoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("cargos")
@@ -40,7 +41,11 @@ public class CargoController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(Cargo cargo, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cargo/cadastro";
+		}
+		
 		cargoService.salvar(cargo);
 		attr.addFlashAttribute("success", "Cargo inserido com sucesso.");
 		return "redirect:/cargos/cadastrar";
@@ -53,7 +58,11 @@ public class CargoController {
 	}
 	
 	@PostMapping("/atualizar")
-	public String atualizar(Cargo cargo, RedirectAttributes attr) {
+	public String atualizar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cargo/cadastro";
+		}
+		
 		cargoService.atualizar(cargo);
 		attr.addFlashAttribute("success", "Registro atualizado com sucesso.");
 		return "redirect:/cargos/cadastrar";
